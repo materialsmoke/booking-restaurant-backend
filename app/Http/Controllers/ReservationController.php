@@ -14,7 +14,7 @@ class ReservationController extends Controller
     // number of total tables of the restaurant
     private int $allTablesNumber = 10;
 
-    // the store method¯\_(ツ)_/¯
+    // the store method
     public function store(StoreReservationRequest $request)
     {
         $numberOfPersons = $request->numberOfPersons;
@@ -24,6 +24,9 @@ class ReservationController extends Controller
         $reservationStartTime =  $request->reservationStartTime;
         
         // check if reservation hour is between 16:00 to 20:00
+        // I don't know reservation time should be a select with 3 options "16:00-18:00" and "16:00-18:00" and "16:00-18:00"?
+        // or user can choose any hour, but reservation is for 2 hours? 
+        // I went for second approach, because customer is more satisfied with the second one¯\_(ツ)_/¯
         $time = Carbon::make($reservationStartTime);
         $date = $time->format('Y-m-d');
         $startHour = Carbon::make($date)->format('Y-m-d 16:00');
