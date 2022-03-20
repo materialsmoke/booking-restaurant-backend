@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminReservationController ;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginUserController;
 use App\Http\Controllers\Auth\RegisterUserController;
+use App\Http\Controllers\DrinkController;
+use App\Http\Controllers\MealController;
 use App\Http\Controllers\ThirdPartyApiController;
 use App\Http\Controllers\ReservationController;
 
@@ -24,7 +27,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('register', RegisterUserController::class);
 Route::post('login', LoginUserController::class);
 
-Route::get('get-the-list-of-drinks', [ThirdPartyApiController::class, 'listOfDrinks']);
-Route::get('get-a-random-meal', [ThirdPartyApiController::class, 'aRandomMeal']);
+Route::apiResource('drinks', DrinkController::class);
+Route::get('meals/random', [MealController::class, 'aRandomMeal']);
 
 Route::post('reservation', [ReservationController::class, 'store']);//store the reservation time
+
+Route::group(['prefix' => 'admin', ], function(){
+    Route::apiResource('reservations', AdminReservationController::class );
+});

@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Meal\Themealdb;
 
+use App\Services\Meal\GetARandomMealInterface;
 use Illuminate\Support\Facades\Http;
 
-class GetARandomMealService
+class GetARandomMealService implements GetARandomMealInterface
 {
     public function get():array
     {

@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Services\Drink\GetListOfDrinksInterface;
+use App\Services\Drink\Punkapi\GetListOfDrinksService;
+use App\Services\Meal\GetARandomMealInterface;
+use App\Services\Meal\Themealdb\GetARandomMealService ;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +27,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // $this->app->singleton( GetARandomMealService::class, function($app){
+        //     return new GetARandomMealService;
+        // });
+
+        $this->app->bind(GetListOfDrinksInterface::class, GetListOfDrinksService::class);
+
+        $this->app->bind(GetARandomMealInterface::class, GetARandomMealService::class);
     }
 }
